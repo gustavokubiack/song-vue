@@ -24,23 +24,31 @@
               <router-link to="/" exact-active-class="active" class="nav-link">Home</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/artists" class="nav-link" active-class="active">Artists</router-link>
+              <router-link to="/artists" class="nav-link" active-class="active"
+                >Artists</router-link
+              >
             </li>
             <li class="nav-item">
               <router-link to="/songs" class="nav-link" active-class="active">Songs</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/reviews" class="nav-link" active-class="active">Reviews</router-link>
+              <router-link to="/reviews" class="nav-link" active-class="active"
+                >Reviews</router-link
+              >
             </li>
           </ul>
 
           <!-- Botão de Ação -->
           <div class="d-flex align-items-center ms-3">
             <template v-if="isAuthenticated">
-              <button @click="handleLogout" class="btn btn-light" style="color: #7C0A02">Logout</button>
+              <button @click="handleLogout" class="btn btn-light" style="color: #7c0a02">
+                Logout
+              </button>
             </template>
             <template v-else>
-              <router-link to="/login"><button class="btn btn-light text-primary">Login</button></router-link>
+              <router-link to="/login"
+                ><button class="btn btn-light text-primary">Login</button></router-link
+              >
             </template>
           </div>
         </div>
@@ -50,37 +58,36 @@
 </template>
 
 <script>
-import Cookies from 'js-cookie';
+import Cookies from 'js-cookie'
 
 export default {
-  name: "Navbar",
+  name: 'Navbar',
   data() {
     return {
-      isAuthenticated: false,
-    };
+      isAuthenticated: false
+    }
   },
   created() {
-    this.checkAuthentication();
+    this.checkAuthentication()
   },
   methods: {
     checkAuthentication() {
-      const token = Cookies.get('authToken');
-      this.isAuthenticated = !!token;
+      const token = Cookies.get('authToken')
+      this.isAuthenticated = !!token
     },
     handleLogout() {
-      Cookies.remove('authToken');
-      this.isAuthenticated = false;
-      this.$router.push('/login');
-    },
-  },
-};
+      Cookies.remove('authToken')
+      this.isAuthenticated = false
+      this.$router.push('/login')
+    }
+  }
+}
 </script>
 
 <style scoped>
 .navbar {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  background-color: #7C0A02;
-
+  background-color: #7c0a02;
 }
 
 .navbar-brand img {

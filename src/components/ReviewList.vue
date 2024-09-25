@@ -9,7 +9,13 @@
           v-model="searchTerm"
         />
       </div>
-      <button class="btn text-white" @click="openCreateReviewModal" style="background-color: #7C0A02;">Adicionar Review</button>
+      <button
+        class="btn text-white"
+        @click="openCreateReviewModal"
+        style="background-color: #7c0a02"
+      >
+        Adicionar Review
+      </button>
     </div>
 
     <table class="table table-hover table-bordered">
@@ -37,9 +43,7 @@
       </tbody>
     </table>
 
-    <p v-if="filteredReviews.length === 0" class="text-center">
-      Nenhuma review encontrada.
-    </p>
+    <p v-if="filteredReviews.length === 0" class="text-center">Nenhuma review encontrada.</p>
 
     <CreateReview
       :show="showCreateReviewModal"
@@ -51,68 +55,68 @@
 </template>
 
 <script>
-import CreateReview from './CreateReview.vue';
+import CreateReview from './CreateReview.vue'
 import Swal from 'sweetalert2'
 
 export default {
   components: {
-    CreateReview,
+    CreateReview
   },
   props: {
     reviews: {
       type: Array,
-      required: true,
+      required: true
     },
     songs: {
       type: Array,
-      required: true,
-    },
+      required: true
+    }
   },
   data() {
     return {
-      searchTerm: "",
-      showCreateReviewModal: false,
-    };
+      searchTerm: '',
+      showCreateReviewModal: false
+    }
   },
   computed: {
     filteredReviews() {
       return this.reviews.filter((review) => {
-        const lowerSearchTerm = this.searchTerm.toLowerCase();
+        const lowerSearchTerm = this.searchTerm.toLowerCase()
         return (
           review.song?.title?.toLowerCase().includes(lowerSearchTerm) ||
           review.comment.toLowerCase().includes(lowerSearchTerm)
-        );
-      });
-    },
+        )
+      })
+    }
   },
   methods: {
     openCreateReviewModal() {
-      this.showCreateReviewModal = true;
+      this.showCreateReviewModal = true
     },
     closeCreateReviewModal() {
-      this.showCreateReviewModal = false;
+      this.showCreateReviewModal = false
     },
     addReview(newReview) {
-      const song = this.songs.find((s) => s.id === newReview.song);
+      const song = this.songs.find((s) => s.id === newReview.song)
       if (song) {
-        newReview.song = song;
+        newReview.song = song
       }
-      this.reviews.push(newReview);
-      this.showModal = false;
+      this.reviews.push(newReview)
+      this.showModal = false
       Swal.fire({
         icon: 'success',
         title: 'Sucesso',
         text: 'Artista criado com sucesso!',
-        confirmButtonText: 'OK',
-      });
+        confirmButtonText: 'OK'
+      })
     },
     formatDate(date) {
-      if (!date) return null;
-      const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-      return new Date(date).toLocaleDateString(undefined, options);
-    },
-  },
-};
+      if (!date) return null
+      const options = { year: 'numeric', month: '2-digit', day: '2-digit' }
+      return new Date(date).toLocaleDateString(undefined, options)
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -127,7 +131,7 @@ export default {
 }
 
 .table th {
-  background-color: #7C0A02;
+  background-color: #7c0a02;
   color: white;
   font-weight: bold;
   text-align: center;

@@ -1,40 +1,39 @@
-import axios from 'axios';
-import Cookies from 'js-cookie';
-import router from '@/router';
+import axios from 'axios'
+import Cookies from 'js-cookie'
+import router from '@/router'
 
 const api = axios.create({
-  baseURL: 'http://localhost:8000/api/v1/',
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   headers: {
-    'Content-Type': 'application/json',
-  },
-});
+    'Content-Type': 'application/json'
+  }
+})
 
 api.interceptors.request.use(
-    (config) => {
-      const token = Cookies.get('authToken');
-      if (token) {
-        config.headers['Authorization'] = `Bearer ${token}`;
-      }
-      return config;
-    },
-    (error) => {
-      return Promise.reject(error);
+  (config) => {
+    const token = Cookies.get('authToken')
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`
     }
-);
-
+    return config
+  },
+  (error) => {
+    return Promise.reject(error)
+  }
+)
 
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    const token = Cookies.get('authToken');
-    if (token){
+    const token = Cookies.get('authToken')
+    if (token) {
       Cookies.remove(token)
     }
     if (error.response && error.response.status === 401) {
-      router.push({ name: 'Login' });
+      router.push({ name: 'Login' })
     }
-    return Promise.reject(error);
+    return Promise.reject(error)
   }
-);
+)
 
-export default api;
+export default api

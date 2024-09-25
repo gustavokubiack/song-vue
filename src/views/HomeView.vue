@@ -57,7 +57,9 @@
                 />
               </div>
               <div class="d-flex justify-content-end mt-2">
-                <button type="button" class="btn btn-secondary" @click="closeEditModal">Cancelar</button>
+                <button type="button" class="btn btn-secondary" @click="closeEditModal">
+                  Cancelar
+                </button>
                 <button type="submit" class="btn btn-primary ms-2">Salvar</button>
               </div>
             </form>
@@ -69,41 +71,41 @@
 </template>
 
 <script>
-import { fetchReviewsByUser, updateReview, deleteReview } from '@/api/reviews';
-import Swal from 'sweetalert2';
+import { fetchReviewsByUser, updateReview, deleteReview } from '@/api/reviews'
+import Swal from 'sweetalert2'
 
 export default {
   data() {
     return {
       reviews: [],
       showEditModal: false,
-      selectedReview: null,
-    };
+      selectedReview: null
+    }
   },
   async created() {
     try {
-      this.reviews = await fetchReviewsByUser();
+      this.reviews = await fetchReviewsByUser()
     } catch (error) {
-      console.error("Erro ao carregar reviews:", error);
+      console.error('Erro ao carregar reviews:', error)
     }
   },
   methods: {
     openEditModal(review) {
-      this.selectedReview = { ...review };
-      this.showEditModal = true;
+      this.selectedReview = { ...review }
+      this.showEditModal = true
     },
     closeEditModal() {
-      this.showEditModal = false;
-      this.selectedReview = null;
+      this.showEditModal = false
+      this.selectedReview = null
     },
     async handleEditReview() {
       try {
-        await updateReview(this.selectedReview);
-        this.showEditModal = false;
-        this.selectedReview = null;
-        this.reviews = await fetchReviewsByUser();
+        await updateReview(this.selectedReview)
+        this.showEditModal = false
+        this.selectedReview = null
+        this.reviews = await fetchReviewsByUser()
       } catch (error) {
-        console.error("Erro ao editar review:", error);
+        console.error('Erro ao editar review:', error)
       }
     },
     async deleteReview(reviewId) {
@@ -116,30 +118,30 @@ export default {
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
           confirmButtonText: 'Sim, excluir!',
-          cancelButtonText: 'Cancelar',
-        });
+          cancelButtonText: 'Cancelar'
+        })
 
         if (result.isConfirmed) {
-          await deleteReview(reviewId);
-          this.reviews = this.reviews.filter((review) => review.id !== reviewId);
+          await deleteReview(reviewId)
+          this.reviews = this.reviews.filter((review) => review.id !== reviewId)
 
           Swal.fire({
             title: 'Excluída!',
             text: 'A review foi excluída com sucesso.',
-            icon: 'success',
-          });
+            icon: 'success'
+          })
         }
       } catch (error) {
-        console.error('Erro ao excluir review:', error);
+        console.error('Erro ao excluir review:', error)
         Swal.fire({
           title: 'Erro',
           text: 'Houve um erro ao excluir a review. Tente novamente.',
-          icon: 'error',
-        });
+          icon: 'error'
+        })
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped>

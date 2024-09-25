@@ -41,32 +41,31 @@
             <button type="submit" class="btn btn-primary">Criar Artista</button>
           </form>
         </div>
-        <div class="modal-footer">
-        </div>
+        <div class="modal-footer"></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { createArtist } from '@/api/artists';
-import Swal from 'sweetalert2';
+import { createArtist } from '@/api/artists'
+import Swal from 'sweetalert2'
 
 export default {
   props: {
     show: {
       type: Boolean,
-      required: true,
-    },
+      required: true
+    }
   },
   data() {
     return {
       artist: {
         name: '',
         birthday: '',
-        nacionality: '',
-      },
-    };
+        nacionality: ''
+      }
+    }
   },
   methods: {
     async handleCreateArtist() {
@@ -74,32 +73,31 @@ export default {
         const artistData = {
           name: this.artist.name,
           birthday: this.artist.birthday === '' ? null : this.artist.birthday,
-          nacionality: this.artist.nacionality,
-        };
+          nacionality: this.artist.nacionality
+        }
 
         const newArtist = await createArtist(
           artistData.name,
           artistData.birthday,
           artistData.nacionality
-        );
-        this.$emit('artist-created', newArtist);
+        )
+        this.$emit('artist-created', newArtist)
 
-        this.closeModal();
+        this.closeModal()
       } catch (error) {
         Swal.fire({
           icon: 'error',
           title: 'Erro',
-          text: 'Erro ao criar artista. Tente novamente.',
-        });
+          text: 'Erro ao criar artista. Tente novamente.'
+        })
       }
     },
     closeModal() {
-      this.$emit('close');
-    },
-  },
-};
+      this.$emit('close')
+    }
+  }
+}
 </script>
-
 
 <style scoped>
 .modal {

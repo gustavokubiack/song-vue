@@ -29,11 +29,7 @@
             </div>
             <div class="form-group mb-3">
               <label for="song-genre">Gênero</label>
-              <select
-                id="song-genre"
-                class="form-control"
-                v-model="song.genre_id"
-              >
+              <select id="song-genre" class="form-control" v-model="song.genre_id">
                 <option v-for="genre in genres" :key="genre.id" :value="genre.id">
                   {{ genre.name }}
                 </option>
@@ -41,12 +37,7 @@
             </div>
             <div class="form-group mb-3">
               <label for="song-artists">Artistas</label>
-              <select
-                id="song-artists"
-                class="form-control"
-                v-model="selectedArtists"
-                multiple
-              >
+              <select id="song-artists" class="form-control" v-model="selectedArtists" multiple>
                 <option v-for="artist in artists" :key="artist.id" :value="artist.id">
                   {{ artist.name }}
                 </option>
@@ -64,61 +55,61 @@
 </template>
 
 <script>
-import { createSong } from '@/api/songs';
-import Swal from 'sweetalert2';
+import { createSong } from '@/api/songs'
+import Swal from 'sweetalert2'
 
 export default {
   props: {
     show: {
       type: Boolean,
-      required: true,
+      required: true
     },
     genres: {
       type: Array,
-      required: true,
+      required: true
     },
     artists: {
       type: Array,
-      required: true,
-    },
+      required: true
+    }
   },
   data() {
     return {
       song: {
         title: '',
         release_date: '',
-        genre_id: null,
+        genre_id: null
       },
-      selectedArtists: [],
-    };
+      selectedArtists: []
+    }
   },
   methods: {
     async handleCreateSong() {
-    try {
-      const songData = {
-        title: this.song.title,
-        release_date: this.song.release_date === '' ? null : this.song.release_date,
-        genre: this.song.genre_id,
-        artists: this.selectedArtists,
-      };
-      console.log(songData)
-      const newSong = await createSong(songData);
+      try {
+        const songData = {
+          title: this.song.title,
+          release_date: this.song.release_date === '' ? null : this.song.release_date,
+          genre: this.song.genre_id,
+          artists: this.selectedArtists
+        }
+        console.log(songData)
+        const newSong = await createSong(songData)
 
-      this.$emit('song-created', newSong);
-      this.closeModal();
-    } catch (error) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Erro',
-        text: 'Erro ao criar música. Tente novamente.',
-      });
-    }
+        this.$emit('song-created', newSong)
+        this.closeModal()
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro',
+          text: 'Erro ao criar música. Tente novamente.'
+        })
+      }
     },
     closeModal() {
-      this.$emit('close');
-    },
-  },
-};
+      this.$emit('close')
+    }
+  }
+}
 </script>
 
 <style scoped>

@@ -1,10 +1,18 @@
 <template>
   <div class="song-list container">
     <div class="d-flex align-items-center mb-4">
-      <button class="btn text-white me-2" @click="openCreateSongModal" style="background-color: #7C0A02;">
+      <button
+        class="btn text-white me-2"
+        @click="openCreateSongModal"
+        style="background-color: #7c0a02"
+      >
         Criar Nova Música
       </button>
-      <button class="btn text-white" @click="openCreateGenreModal" style="background-color: #7C0A02;">
+      <button
+        class="btn text-white"
+        @click="openCreateGenreModal"
+        style="background-color: #7c0a02"
+      >
         Criar Novo Gênero
       </button>
     </div>
@@ -25,7 +33,7 @@
           <td>{{ index + 1 }}</td>
           <td>{{ song.title }}</td>
           <td>{{ song.genre?.name || '-' }}</td>
-          <td>{{ song.rate || '-'}}</td>
+          <td>{{ song.rate || '-' }}</td>
           <td>
             <span v-for="(artist, idx) in song.artists" :key="artist.id">
               {{ artist.name }}<span v-if="idx < song.artists.length - 1">, </span>
@@ -53,96 +61,96 @@
 </template>
 
 <script>
-import { fetchArtists } from '@/api/artists';
-import { fetchGenres } from '@/api/genres';
-import CreateSong from '@/components/CreateSong.vue';
-import Swal from 'sweetalert2';
-import CreateGenre from './CreateGenre.vue';
+import { fetchArtists } from '@/api/artists'
+import { fetchGenres } from '@/api/genres'
+import CreateSong from '@/components/CreateSong.vue'
+import Swal from 'sweetalert2'
+import CreateGenre from './CreateGenre.vue'
 
 export default {
   components: {
     CreateSong,
-    CreateGenre,
+    CreateGenre
   },
   props: {
     songs: {
       type: Array,
-      required: true,
-    },
+      required: true
+    }
   },
   data() {
     return {
       genres: [],
       artists: [],
       showCreateSongModal: false,
-      showCreateGenreModal: false,
-    };
+      showCreateGenreModal: false
+    }
   },
   mounted() {
-    this.loadGenres();
-    this.loadArtists();
+    this.loadGenres()
+    this.loadArtists()
   },
   methods: {
     async loadGenres() {
       try {
-        const response = await fetchGenres();
-        this.genres = response;
+        const response = await fetchGenres()
+        this.genres = response
       } catch (error) {
-        console.error('Erro ao buscar gêneros:', error);
+        console.error('Erro ao buscar gêneros:', error)
         Swal.fire({
           icon: 'error',
           title: 'Erro',
-          text: 'Não foi possível carregar os gêneros. Tente novamente mais tarde.',
-        });
+          text: 'Não foi possível carregar os gêneros. Tente novamente mais tarde.'
+        })
       }
     },
     async loadArtists() {
       try {
-        const response = await fetchArtists();
-        this.artists = response;
+        const response = await fetchArtists()
+        this.artists = response
       } catch (error) {
-        console.error('Erro ao buscar artistas:', error);
+        console.error('Erro ao buscar artistas:', error)
         Swal.fire({
           icon: 'error',
           title: 'Erro',
-          text: 'Não foi possível carregar os artistas. Tente novamente mais tarde.',
-        });
+          text: 'Não foi possível carregar os artistas. Tente novamente mais tarde.'
+        })
       }
     },
     openCreateSongModal() {
-      this.showCreateSongModal = true;
+      this.showCreateSongModal = true
     },
     openCreateGenreModal() {
-      this.showCreateGenreModal = true;
+      this.showCreateGenreModal = true
     },
     formatDate(date) {
-      if (!date) return null;
-      const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-      return new Date(date).toLocaleDateString(undefined, options);
+      if (!date) return null
+      const options = { year: 'numeric', month: '2-digit', day: '2-digit' }
+      return new Date(date).toLocaleDateString(undefined, options)
     },
     addSong(newSong) {
-      this.songs.push(newSong);
-      this.showCreateSongModal = false;
+      this.songs.push(newSong)
+      this.showCreateSongModal = false
 
       Swal.fire({
         icon: 'success',
         title: 'Sucesso',
         text: 'Música criada com sucesso!',
-        confirmButtonText: 'OK',
-      });
+        confirmButtonText: 'OK'
+      })
     },
-    addGenre(newGenre){
+    addGenre(newGenre) {
       this.genres.push(newGenre)
-      this.showCreateSongModal = false;
+      this.showCreateSongModal = false
       Swal.fire({
         icon: 'success',
         title: 'Sucesso',
         text: 'Gênero criada com sucesso!',
-        confirmButtonText: 'OK',
-      });
+        confirmButtonText: 'OK'
+      })
     }
-  },
-};
+  }
+}
 </script>
 
 <style scoped>
@@ -157,7 +165,7 @@ export default {
 }
 
 .table th {
-  background-color: #7C0A02;
+  background-color: #7c0a02;
   color: white;
   font-weight: bold;
   text-align: center;

@@ -10,10 +10,10 @@
         />
       </div>
 
-    <button class="btn text-white" style="background-color: #7C0A02" @click="showModal = true">
-      Criar Novo Artista
-    </button>
-  </div>
+      <button class="btn text-white" style="background-color: #7c0a02" @click="showModal = true">
+        Criar Novo Artista
+      </button>
+    </div>
 
     <table class="table table-hover table-bordered">
       <thead class="table-primary">
@@ -27,71 +27,67 @@
       <tbody>
         <tr v-for="(artist, index) in filteredArtists" :key="artist.id">
           <td>{{ index + 1 }}</td>
-          <td>{{ artist.name}}</td>
+          <td>{{ artist.name }}</td>
           <td>{{ formatDate(artist.birthday) || '-' }}</td>
           <td>{{ artist.nacionality || '-' }}</td>
         </tr>
       </tbody>
     </table>
 
-    <CreateArtist
-      :show="showModal"
-      @close="showModal = false"
-      @artist-created="addArtist"
-    />
+    <CreateArtist :show="showModal" @close="showModal = false" @artist-created="addArtist" />
   </div>
 </template>
 
 <script>
-import CreateArtist from '@/components/CreateArtist.vue';
-import Swal from 'sweetalert2';
+import CreateArtist from '@/components/CreateArtist.vue'
+import Swal from 'sweetalert2'
 
 export default {
   components: {
-    CreateArtist,
+    CreateArtist
   },
   props: {
     artists: {
       type: Array,
-      required: true,
-    },
+      required: true
+    }
   },
   data() {
     return {
       searchTerm: '',
-      showModal: false,
-    };
+      showModal: false
+    }
   },
   computed: {
     filteredArtists() {
       return this.artists.filter((artist) => {
-        const lowerSearchTerm = this.searchTerm.toLowerCase();
+        const lowerSearchTerm = this.searchTerm.toLowerCase()
         return (
           artist.name?.toLowerCase().includes(lowerSearchTerm) ||
           artist.nacionality?.toLowerCase().includes(lowerSearchTerm)
-        );
-      });
-    },
+        )
+      })
+    }
   },
   methods: {
     addArtist(newArtist) {
-      this.artists.push(newArtist);
-      this.showModal = false;
+      this.artists.push(newArtist)
+      this.showModal = false
 
       Swal.fire({
         icon: 'success',
         title: 'Sucesso',
         text: 'Artista criado com sucesso!',
-        confirmButtonText: 'OK',
-      });
+        confirmButtonText: 'OK'
+      })
     },
     formatDate(date) {
-      if (!date) return null;
-      const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-      return new Date(date).toLocaleDateString(undefined, options);
-    },
-  },
-};
+      if (!date) return null
+      const options = { year: 'numeric', month: '2-digit', day: '2-digit' }
+      return new Date(date).toLocaleDateString(undefined, options)
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -106,7 +102,7 @@ export default {
 }
 
 .table th {
-  background-color: #7C0A02;
+  background-color: #7c0a02;
   color: white;
   font-weight: bold;
   text-align: center;

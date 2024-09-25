@@ -1,8 +1,8 @@
 import './assets/main.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap';
-import '@fortawesome/fontawesome-free/css/all.css';
-import Cookies from 'js-cookie';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap'
+import '@fortawesome/fontawesome-free/css/all.css'
+import Cookies from 'js-cookie'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -11,7 +11,7 @@ import App from './App.vue'
 import router from './router'
 
 const app = createApp(App)
-app.config.globalProperties.$cookies = Cookies;
+app.config.globalProperties.$cookies = Cookies
 
 app.use(createPinia())
 app.use(router)
