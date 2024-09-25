@@ -14,7 +14,7 @@
         @click="openCreateReviewModal"
         style="background-color: #7c0a02"
       >
-        Adicionar Review
+        Adicionar avaliação
       </button>
     </div>
 
@@ -106,9 +106,13 @@ export default {
       Swal.fire({
         icon: 'success',
         title: 'Sucesso',
-        text: 'Artista criado com sucesso!',
-        confirmButtonText: 'OK'
+        text: 'Review criado com sucesso!',
+        confirmButtonText: 'OK',
+        timer: 2000
       })
+      setTimeout(() => {
+        window.location.reload()
+      }, 2000)
     },
     formatDate(date) {
       if (!date) return null

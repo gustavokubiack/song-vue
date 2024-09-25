@@ -52,7 +52,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const token = Cookies.get('authToken')
-  const protectedRoutes = ['Artists', 'Songs', 'Reviews']
+  const protectedRoutes = ['Artists', 'Songs', 'Reviews', 'Home']
   if (protectedRoutes.includes(to.name) && !token) {
     next({ name: 'Login' })
   } else {

@@ -28,20 +28,21 @@
               />
             </div>
             <div class="form-group mb-3">
-              <label for="artist-nacionality">Nacionalidade</label>
+              <label for="artist-nationality">Nacionalidade</label>
               <input
                 type="text"
-                id="artist-nacionality"
+                id="artist-nationality"
                 class="form-control"
-                v-model="artist.nacionality"
+                v-model="artist.nationality"
                 placeholder="Nacionalidade do artista"
               />
             </div>
-            <button type="button" class="btn btn-secondary" @click="closeModal">Fechar</button>
-            <button type="submit" class="btn btn-primary">Criar Artista</button>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" @click="closeModal">Fechar</button>
+              <button type="submit" class="btn btn-primary">Criar Artista</button>
+            </div>
           </form>
         </div>
-        <div class="modal-footer"></div>
       </div>
     </div>
   </div>
@@ -63,7 +64,7 @@ export default {
       artist: {
         name: '',
         birthday: '',
-        nacionality: ''
+        nationality: ''
       }
     }
   },
@@ -73,13 +74,13 @@ export default {
         const artistData = {
           name: this.artist.name,
           birthday: this.artist.birthday === '' ? null : this.artist.birthday,
-          nacionality: this.artist.nacionality
+          nationality: this.artist.nationality
         }
 
         const newArtist = await createArtist(
           artistData.name,
           artistData.birthday,
-          artistData.nacionality
+          artistData.nationality
         )
         this.$emit('artist-created', newArtist)
 

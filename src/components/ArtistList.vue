@@ -29,7 +29,7 @@
           <td>{{ index + 1 }}</td>
           <td>{{ artist.name }}</td>
           <td>{{ formatDate(artist.birthday) || '-' }}</td>
-          <td>{{ artist.nacionality || '-' }}</td>
+          <td>{{ artist.nationality || '-' }}</td>
         </tr>
       </tbody>
     </table>
@@ -64,7 +64,7 @@ export default {
         const lowerSearchTerm = this.searchTerm.toLowerCase()
         return (
           artist.name?.toLowerCase().includes(lowerSearchTerm) ||
-          artist.nacionality?.toLowerCase().includes(lowerSearchTerm)
+          artist.nationality?.toLowerCase().includes(lowerSearchTerm)
         )
       })
     }
@@ -80,6 +80,9 @@ export default {
         text: 'Artista criado com sucesso!',
         confirmButtonText: 'OK'
       })
+      setTimeout(() => {
+        window.location.reload()
+      }, 2000)
     },
     formatDate(date) {
       if (!date) return null

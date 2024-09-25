@@ -29,7 +29,7 @@
             </div>
             <div class="form-group mb-3">
               <label for="song-genre">Gênero</label>
-              <select id="song-genre" class="form-control" v-model="song.genre_id">
+              <select id="song-genre" class="form-select" v-model="song.genre_id">
                 <option v-for="genre in genres" :key="genre.id" :value="genre.id">
                   {{ genre.name }}
                 </option>

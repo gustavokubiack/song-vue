@@ -138,6 +138,9 @@ export default {
         text: 'Música criada com sucesso!',
         confirmButtonText: 'OK'
       })
+      setTimeout(() => {
+        window.location.reload()
+      }, 2000)
     },
     addGenre(newGenre) {
       this.genres.push(newGenre)
@@ -148,6 +151,9 @@ export default {
         text: 'Gênero criada com sucesso!',
         confirmButtonText: 'OK'
       })
+      setTimeout(() => {
+        window.location.reload()
+      }, 2000)
     }
   }
 }

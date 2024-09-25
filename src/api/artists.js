@@ -10,12 +10,12 @@ export const fetchArtists = async () => {
   }
 }
 
-export const createArtist = async (name, birthday, nacionality) => {
+export const createArtist = async (name, birthday, nationality) => {
   try {
     const response = await api.post('artists/', {
       name: name,
       birthday: birthday,
-      nacionality: nacionality
+      nationality: nationality
     })
     return response.data
   } catch (error) {

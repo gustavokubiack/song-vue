@@ -3,13 +3,13 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Criar Review</h5>
+          <h5 class="modal-title">Adicionar avaliação</h5>
         </div>
         <div class="modal-body">
           <form @submit.prevent="handleCreateReview">
             <div class="form-group mb-3">
               <label for="song-select">Música</label>
-              <select id="song-select" class="form-control" v-model="review.song_id" required>
+              <select id="song-select" class="form-select" v-model="review.song_id" required>
                 <option v-for="song in songs" :key="song.id" :value="song.id">
                   {{ song.title }}
                 </option>
@@ -42,7 +42,7 @@
 
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" @click="closeModal">Fechar</button>
-              <button type="submit" class="btn btn-primary">Criar Review</button>
+              <button type="submit" class="btn btn-primary">Adicionar avaliação</button>
             </div>
           </form>
         </div>
@@ -96,7 +96,7 @@ export default {
         Swal.fire({
           icon: 'error',
           title: 'Erro',
-          text: 'Erro ao criar review. Tente novamente.'
+          text: 'Erro ao criar avaliação. Tente novamente.'
         })
       }
     },

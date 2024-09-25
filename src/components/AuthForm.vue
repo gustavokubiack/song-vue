@@ -58,7 +58,7 @@ export default {
         this.$router.push({ name: 'Home' })
       } catch (error) {
         console.log(error)
-        this.errorMessage = 'Login failed. Please check your credentials.'
+        this.errorMessage = 'Login falhou. Verifique suas credenciais.'
       }
     }
   }

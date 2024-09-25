@@ -25,15 +25,15 @@
             </li>
             <li class="nav-item">
               <router-link to="/artists" class="nav-link" active-class="active"
-                >Artists</router-link
+                >Artistas</router-link
               >
             </li>
             <li class="nav-item">
-              <router-link to="/songs" class="nav-link" active-class="active">Songs</router-link>
+              <router-link to="/songs" class="nav-link" active-class="active">Músicas</router-link>
             </li>
             <li class="nav-item">
               <router-link to="/reviews" class="nav-link" active-class="active"
-                >Reviews</router-link
+                >Avaliações</router-link
               >
             </li>
           </ul>
@@ -42,12 +42,12 @@
           <div class="d-flex align-items-center ms-3">
             <template v-if="isAuthenticated">
               <button @click="handleLogout" class="btn btn-light" style="color: #7c0a02">
-                Logout
+                Sair
               </button>
             </template>
             <template v-else>
               <router-link to="/login"
-                ><button class="btn btn-light text-primary">Login</button></router-link
+                ><button class="btn btn-light text-primary">Entrar</button></router-link
               >
             </template>
           </div>
