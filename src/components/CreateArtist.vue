@@ -3,23 +3,22 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Criar Novo Artista</h5>
+          <h5 class="modal-title">{{ $t('create_artist') }}</h5>
         </div>
         <div class="modal-body">
           <form @submit.prevent="handleCreateArtist">
             <div class="form-group mb-3">
-              <label for="artist-name">Nome</label>
+              <label for="artist-name">{{ $t('name') }}</label>
               <input
                 type="text"
                 id="artist-name"
                 class="form-control"
                 v-model="artist.name"
-                placeholder="Nome do artista"
                 required
               />
             </div>
             <div class="form-group mb-3">
-              <label for="artist-birthday">Data de Nascimento</label>
+              <label for="artist-birthday">{{ $t('birthday') }}</label>
               <input
                 type="date"
                 id="artist-birthday"
@@ -28,18 +27,19 @@
               />
             </div>
             <div class="form-group mb-3">
-              <label for="artist-nationality">Nacionalidade</label>
+              <label for="artist-nationality">{{ $t('nationality') }}</label>
               <input
                 type="text"
                 id="artist-nationality"
                 class="form-control"
                 v-model="artist.nationality"
-                placeholder="Nacionalidade do artista"
               />
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" @click="closeModal">Fechar</button>
-              <button type="submit" class="btn btn-primary">Criar Artista</button>
+              <button type="button" class="btn btn-secondary" @click="closeModal">
+                {{ $t('close') }}
+              </button>
+              <button type="submit" class="btn btn-primary">{{ $t('create_artist') }}</button>
             </div>
           </form>
         </div>
@@ -70,6 +70,8 @@ export default {
   },
   methods: {
     async handleCreateArtist() {
+      const text = this.$t('error_artist')
+      const title = this.$t('error')
       try {
         const artistData = {
           name: this.artist.name,
@@ -88,8 +90,8 @@ export default {
       } catch (error) {
         Swal.fire({
           icon: 'error',
-          title: 'Erro',
-          text: 'Erro ao criar artista. Tente novamente.'
+          title: title,
+          text: text
         })
       }
     },

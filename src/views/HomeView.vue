@@ -1,16 +1,15 @@
 <template>
   <div>
-    <p>Aqui você pode gerenciar suas avaliações das músicas.</p>
+    <p>{{ $t('desc_home') }}</p>
 
-    <!-- Tabela de Reviews -->
     <table class="table">
       <thead>
         <tr>
           <th>#</th>
-          <th>Música</th>
-          <th>Avaliação</th>
-          <th>Comentário</th>
-          <th>Ações</th>
+          <th>{{ $t('musics') }}</th>
+          <th>{{ $t('reviews') }}</th>
+          <th>{{ $t('comment') }}</th>
+          <th>{{ $t('actions') }}</th>
         </tr>
       </thead>
       <tbody>
@@ -20,8 +19,12 @@
           <td>{{ review.stars }}</td>
           <td>{{ review.comment }}</td>
           <td class="d-flex justify-content-start">
-            <button class="btn btn-warning me-2" @click="openEditModal(review)">Editar</button>
-            <button class="btn btn-danger" @click="deleteReview(review.id)">Excluir</button>
+            <button class="btn btn-warning me-2" @click="openEditModal(review)">
+              {{ $t('edit') }}
+            </button>
+            <button class="btn btn-danger" @click="deleteReview(review.id)">
+              {{ $t('delete') }}
+            </button>
           </td>
         </tr>
       </tbody>
@@ -31,12 +34,12 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Editar avaliação</h5>
+            <h5 class="modal-title">{{ $t('edit_review') }}</h5>
           </div>
           <div class="modal-body">
             <form @submit.prevent="handleEditReview">
               <div class="form-group">
-                <label for="editComment">Comentário</label>
+                <label for="editComment">{{ $t('comment') }}</label>
                 <textarea
                   id="editComment"
                   class="form-control"
@@ -45,7 +48,7 @@
                 ></textarea>
               </div>
               <div class="form-group">
-                <label for="editRating">Nota (1 a 5 estrelas)</label>
+                <label for="editRating">{{ $t('rating_stars') }}</label>
                 <input
                   type="number"
                   id="editRating"
@@ -58,9 +61,9 @@
               </div>
               <div class="d-flex justify-content-end mt-2">
                 <button type="button" class="btn btn-secondary" @click="closeEditModal">
-                  Cancelar
+                  {{ $t('cancel') }}
                 </button>
-                <button type="submit" class="btn btn-primary ms-2">Salvar</button>
+                <button type="submit" class="btn btn-primary ms-2">{{ $t('save') }}</button>
               </div>
             </form>
           </div>
@@ -110,32 +113,39 @@ export default {
     },
     async deleteReview(reviewId) {
       try {
+        const title = this.$t('sure')
+        const text = this.$t('revert_action')
+        const cancel = this.$t('cancel')
+        const confirmBtn = this.$t('confirm_action')
         const result = await Swal.fire({
-          title: 'Tem certeza?',
-          text: 'Você não poderá reverter essa ação!',
+          title: title,
+          text: text,
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
-          confirmButtonText: 'Sim, excluir!',
-          cancelButtonText: 'Cancelar'
+          confirmButtonText: confirmBtn,
+          cancelButtonText: cancel
         })
 
         if (result.isConfirmed) {
           await deleteReview(reviewId)
           this.reviews = this.reviews.filter((review) => review.id !== reviewId)
-
+          const title = this.$t('deleted')
+          const text = this.$t('deleted_review')
           Swal.fire({
-            title: 'Excluída!',
-            text: 'A review foi excluída com sucesso.',
+            title: title,
+            text: text,
             icon: 'success'
           })
         }
       } catch (error) {
         console.error('Erro ao excluir review:', error)
+        const title = this.$t('error')
+        const text = this.$t('error_delete_review')
         Swal.fire({
-          title: 'Erro',
-          text: 'Houve um erro ao excluir a review. Tente novamente.',
+          title: title,
+          text: text,
           icon: 'error'
         })
       }

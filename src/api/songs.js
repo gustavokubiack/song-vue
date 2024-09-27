@@ -11,7 +11,6 @@ export const fetchSongs = async () => {
 }
 
 export const createSong = async (songData) => {
-  console.log(songData)
   try {
     const response = await api.post('songs/', {
       title: songData.title,

@@ -24,17 +24,19 @@
               <router-link to="/" exact-active-class="active" class="nav-link">Home</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/artists" class="nav-link" active-class="active"
-                >Artistas</router-link
-              >
+              <router-link to="/artists" class="nav-link" active-class="active">{{
+                $t('artists')
+              }}</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/songs" class="nav-link" active-class="active">Músicas</router-link>
+              <router-link to="/songs" class="nav-link" active-class="active">{{
+                $t('musics')
+              }}</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/reviews" class="nav-link" active-class="active"
-                >Avaliações</router-link
-              >
+              <router-link to="/reviews" class="nav-link" active-class="active">{{
+                $t('reviews')
+              }}</router-link>
             </li>
           </ul>
 
@@ -42,12 +44,12 @@
           <div class="d-flex align-items-center ms-3">
             <template v-if="isAuthenticated">
               <button @click="handleLogout" class="btn btn-light" style="color: #7c0a02">
-                Sair
+                {{ $t('logout') }}
               </button>
             </template>
             <template v-else>
               <router-link to="/login"
-                ><button class="btn btn-light text-primary">Entrar</button></router-link
+                ><button class="btn btn-light text-primary">{{ $t('enter') }}</button></router-link
               >
             </template>
           </div>

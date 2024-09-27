@@ -38,7 +38,6 @@ export const createReview = async (reviewData) => {
 }
 
 export const updateReview = async (reviewData) => {
-  console.log(reviewData)
   try {
     const response = await api.put(`reviews/${reviewData.id}/`, {
       song: reviewData.song.id,

@@ -5,7 +5,7 @@
         <input
           type="text"
           class="form-control"
-          placeholder="Buscar por música ou comentário"
+          :placeholder="$t('search_review')"
           v-model="searchTerm"
         />
       </div>
@@ -14,7 +14,7 @@
         @click="openCreateReviewModal"
         style="background-color: #7c0a02"
       >
-        Adicionar avaliação
+        {{ $t('create_review') }}
       </button>
     </div>
 
@@ -22,10 +22,10 @@
       <thead class="table-primary">
         <tr>
           <th>#</th>
-          <th>Música</th>
-          <th>Avaliação</th>
-          <th>Comentário</th>
-          <th>Usuário</th>
+          <th>{{ $t('musics') }}</th>
+          <th>{{ $t('reviews') }}</th>
+          <th>{{ $t('comment') }}</th>
+          <th>{{ $t('users') }}</th>
         </tr>
       </thead>
       <tbody>
@@ -103,10 +103,12 @@ export default {
       }
       this.reviews.push(newReview)
       this.showModal = false
+      const text = this.$t('sucess_review')
+      const title = this.$t('sucess')
       Swal.fire({
         icon: 'success',
-        title: 'Sucesso',
-        text: 'Review criado com sucesso!',
+        title: title,
+        text: text,
         confirmButtonText: 'OK',
         timer: 2000
       })

@@ -3,12 +3,12 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Adicionar avaliação</h5>
+          <h5 class="modal-title">{{ $t('create_review') }}</h5>
         </div>
         <div class="modal-body">
           <form @submit.prevent="handleCreateReview">
             <div class="form-group mb-3">
-              <label for="song-select">Música</label>
+              <label for="song-select">{{ $t('musics') }}</label>
               <select id="song-select" class="form-select" v-model="review.song_id" required>
                 <option v-for="song in songs" :key="song.id" :value="song.id">
                   {{ song.title }}
@@ -17,18 +17,17 @@
             </div>
 
             <div class="form-group mb-3">
-              <label for="review-comment">Comentário</label>
+              <label for="review-comment">{{ $t('comment') }}</label>
               <textarea
                 id="review-comment"
                 class="form-control"
                 v-model="review.comment"
-                placeholder="Escreva seu comentário"
                 required
               ></textarea>
             </div>
 
             <div class="form-group mb-3">
-              <label for="review-rating">Nota (1 a 5 estrelas)</label>
+              <label for="review-rating">{{ $t('rating_stars') }}</label>
               <input
                 type="number"
                 id="review-rating"
@@ -41,8 +40,10 @@
             </div>
 
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" @click="closeModal">Fechar</button>
-              <button type="submit" class="btn btn-primary">Adicionar avaliação</button>
+              <button type="button" class="btn btn-secondary" @click="closeModal">
+                {{ $t('close') }}
+              </button>
+              <button type="submit" class="btn btn-primary">{{ $t('create_review') }}</button>
             </div>
           </form>
         </div>
@@ -81,6 +82,8 @@ export default {
   methods: {
     async handleCreateReview() {
       this.userInfo = await getUserInfoFromToken()
+      const title = this.$t('error')
+      const text = this.$t('error_review')
       try {
         const reviewData = {
           song: this.review.song_id,
@@ -92,11 +95,10 @@ export default {
         this.$emit('review-created', newReview)
         this.closeModal()
       } catch (error) {
-        console.log(error)
         Swal.fire({
           icon: 'error',
-          title: 'Erro',
-          text: 'Erro ao criar avaliação. Tente novamente.'
+          title: title,
+          text: text
         })
       }
     },

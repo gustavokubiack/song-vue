@@ -3,7 +3,6 @@ import api from './axiosConfig'
 export const fetchGenres = async () => {
   try {
     const response = await api.get('genres/')
-    console.log(response.data.results)
     return response.data.results
   } catch (error) {
     console.error('Erro ao buscar genres:', error)

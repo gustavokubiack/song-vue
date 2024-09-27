@@ -3,24 +3,19 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Criar Gênero</h5>
+          <h5 class="modal-title">{{ $t('create_genre') }}</h5>
         </div>
         <div class="modal-body">
           <form @submit.prevent="handleCreateGenre">
             <div class="form-group mb-3">
-              <label for="artist-name">Nome</label>
-              <input
-                type="text"
-                id="artist-name"
-                class="form-control"
-                v-model="name"
-                placeholder="Nome do Gênero"
-                required
-              />
+              <label for="artist-name">{{ $t('name') }}</label>
+              <input type="text" id="artist-name" class="form-control" v-model="name" required />
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" @click="closeModal">Fechar</button>
-              <button type="submit" class="btn btn-primary">Criar Gênero</button>
+              <button type="button" class="btn btn-secondary" @click="closeModal">
+                {{ $t('close') }}
+              </button>
+              <button type="submit" class="btn btn-primary">{{ $t('create_genre') }}</button>
             </div>
           </form>
         </div>
@@ -47,6 +42,8 @@ export default {
   },
   methods: {
     async handleCreateGenre() {
+      const text = this.$t('error_genre')
+      const title = this.$t('error')
       try {
         const genreData = {
           name: this.name
@@ -59,8 +56,8 @@ export default {
       } catch (error) {
         Swal.fire({
           icon: 'error',
-          title: 'Erro',
-          text: 'Erro ao criar artista. Tente novamente.'
+          title: title,
+          text: text
         })
       }
     },

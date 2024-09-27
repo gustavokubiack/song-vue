@@ -5,13 +5,13 @@
         <input
           type="text"
           class="form-control"
-          placeholder="Buscar por nome"
+          :placeholder="$t('search_name')"
           v-model="searchTerm"
         />
       </div>
 
       <button class="btn text-white" style="background-color: #7c0a02" @click="showModal = true">
-        Criar Novo Artista
+        {{ $t('create_artist') }}
       </button>
     </div>
 
@@ -19,9 +19,9 @@
       <thead class="table-primary">
         <tr>
           <th>#</th>
-          <th>Nome</th>
-          <th>Nascimento</th>
-          <th>Nacionalidade</th>
+          <th>{{ $t('name') }}</th>
+          <th>{{ $t('birthday') }}</th>
+          <th>{{ $t('nationality') }}</th>
         </tr>
       </thead>
       <tbody>
@@ -73,11 +73,12 @@ export default {
     addArtist(newArtist) {
       this.artists.push(newArtist)
       this.showModal = false
-
+      const title = this.$t('sucess')
+      const text = this.$t('sucess_artist')
       Swal.fire({
         icon: 'success',
-        title: 'Sucesso',
-        text: 'Artista criado com sucesso!',
+        title: title,
+        text: text,
         confirmButtonText: 'OK'
       })
       setTimeout(() => {

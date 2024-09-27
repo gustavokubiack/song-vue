@@ -6,14 +6,14 @@
         @click="openCreateSongModal"
         style="background-color: #7c0a02"
       >
-        Criar Nova Música
+        {{ $t('create_music') }}
       </button>
       <button
         class="btn text-white"
         @click="openCreateGenreModal"
         style="background-color: #7c0a02"
       >
-        Criar Novo Gênero
+        {{ $t('create_genre') }}
       </button>
     </div>
 
@@ -21,11 +21,11 @@
       <thead class="table-primary">
         <tr>
           <th>#</th>
-          <th>Música</th>
-          <th>Gênero</th>
-          <th>Média Avaliação</th>
-          <th>Artistas</th>
-          <th>Lançamento</th>
+          <th>{{ $t('musics') }}</th>
+          <th>{{ $t('genre') }}</th>
+          <th>{{ $t('rating_average') }}</th>
+          <th>{{ $t('artists') }}</th>
+          <th>{{ $t('release_date') }}</th>
         </tr>
       </thead>
       <tbody>
@@ -92,6 +92,8 @@ export default {
   },
   methods: {
     async loadGenres() {
+      const title = this.$t('error')
+      const text = this.$t('unknown_error')
       try {
         const response = await fetchGenres()
         this.genres = response
@@ -99,12 +101,14 @@ export default {
         console.error('Erro ao buscar gêneros:', error)
         Swal.fire({
           icon: 'error',
-          title: 'Erro',
-          text: 'Não foi possível carregar os gêneros. Tente novamente mais tarde.'
+          title: title,
+          text: text
         })
       }
     },
     async loadArtists() {
+      const title = this.$t('error')
+      const text = this.$t('unknown_error')
       try {
         const response = await fetchArtists()
         this.artists = response
@@ -112,8 +116,8 @@ export default {
         console.error('Erro ao buscar artistas:', error)
         Swal.fire({
           icon: 'error',
-          title: 'Erro',
-          text: 'Não foi possível carregar os artistas. Tente novamente mais tarde.'
+          title: title,
+          text: text
         })
       }
     },
@@ -131,11 +135,12 @@ export default {
     addSong(newSong) {
       this.songs.push(newSong)
       this.showCreateSongModal = false
-
+      const title = this.$t('sucess')
+      const text = this.$t('sucess_music')
       Swal.fire({
         icon: 'success',
-        title: 'Sucesso',
-        text: 'Música criada com sucesso!',
+        title: title,
+        text: text,
         confirmButtonText: 'OK'
       })
       setTimeout(() => {
@@ -145,10 +150,12 @@ export default {
     addGenre(newGenre) {
       this.genres.push(newGenre)
       this.showCreateSongModal = false
+      const title = this.$t('sucess')
+      const text = this.$t('sucess_genre')
       Swal.fire({
+        title: title,
         icon: 'success',
-        title: 'Sucesso',
-        text: 'Gênero criada com sucesso!',
+        text: text,
         confirmButtonText: 'OK'
       })
       setTimeout(() => {
