@@ -56,7 +56,7 @@ export default {
 
         this.$router.push({ name: 'Home' })
       } catch (error) {
-        this.errorMessage = $t('login_failed')
+        this.errorMessage = this.$t('login_failed')
       }
     }
   }
